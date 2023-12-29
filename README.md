@@ -8,9 +8,11 @@ Email: user@xyz.com
 Password: 123456
 
 Key Features:
-1) User Authentication:
-2) CRUD Operations:
-3) JWT for Enhanced Security:
+1) User Authentication
+2) CRUD Operations
+3) JWT for Enhanced Security
+4) Search Functionality
+5) Filters
 
 
 User-Friendly Experience:
