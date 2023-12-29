@@ -120,16 +120,27 @@ const Dashboard = ({logedin,logoutHandler}) => {
     else if (addUpdate === "Add") passData();
   }, [newuser]);
 
+
+    const [val, setVal] = useState("");
+    const searchhandler = (event) => {
+        if (event.target === null) {
+          setVal("")
+        } else {
+         setVal(event.target.value)
+        }
+      };
+
   return (
     <div className="">
       <Navbar logoutHandler={logoutHandler}/>
       <div className="flex justify-between px-[15%] mt-10 gap-x-10">
         <div className="w-[75%]">
-          <NavbarFilter fetchData={fetchData}/>
+          <NavbarFilter fetchData={fetchData} searchhandler={searchhandler}/>
           <UserList
             dataList={dataList}
             editHandler={editHandler}
             deleteUser={deleteUser}
+            val={val}
           />
         </div>
         <div className="w-[25%]">

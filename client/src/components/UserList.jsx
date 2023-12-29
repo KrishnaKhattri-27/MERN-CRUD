@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import User from './User'
 
-const UserList = ({dataList,editHandler,deleteUser}) => {
+const UserList = ({dataList,editHandler,deleteUser,val}) => {
+
   return (
     <div className="mt-5 flex-col flex gap-y-4">
     {dataList?.length === 0 ? (
@@ -17,6 +18,8 @@ const UserList = ({dataList,editHandler,deleteUser}) => {
           item={e}
           editHandler={editHandler}
           deleteUser={deleteUser}
+          val={val}
+          dataList={dataList}
         />
       ))
     )}
