@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import User from './User'
 
-const UserList = ({dataList,editHandler,deleteUser,val}) => {
-
+const UserList = ({dataList,editHandler,deleteUser,val,change}) => {
+    useEffect(()=>{
+    },[change])
   return (
     <div className="mt-5 flex-col flex gap-y-4">
     {dataList?.length === 0 ? (

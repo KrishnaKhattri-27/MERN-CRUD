@@ -8,10 +8,11 @@ const Signup = ({passdata}) => {
   const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("male");
   const [hearAbout, setHearAbout] = useState([]);
-  // const [selectedState, setSelectedState] = useState('');
   const [states, setStates] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [cities, setCities] = useState([]);
+  const [errorM, setErrorM] = useState("");
+  const [submit, setSubmit] = useState(false);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -75,12 +76,32 @@ const Signup = ({passdata}) => {
       state: states,
       city: selectedCity,
     });
+    setSubmit(true);
   };
 
   useEffect(()=>{
+    if (
+      userData.name === "" ||
+      userData.email === "" ||
+      userData.password === "" ||
+      userData.phone === "" ||
+      userData.gender === "" ||
+      userData.hearAbout === "" ||
+      userData.state === "" ||
+      userData.city === ""
+    ){
+    setErrorM("Fill all entries..!!")
+    }
+    else
     passdata(userData,"signup");
   },[userData])
  
+    useEffect(()=>{
+      setTimeout(()=>{
+        setSubmit(false)
+        setErrorM("")
+      },3000)
+    },[submit])
 
 
  const getCitiesInState= async function (country, state) {
@@ -158,11 +179,14 @@ const Signup = ({passdata}) => {
   }
 
   return (
-   <div className="h-screen flex items-center">
-     <div className="w-[50%] px-8 mx-auto bg-slate-600 py-10 rounded-lg">
+   <div className="sm:h-screen py-4 flex items-center">
+     <div className="md:w-[50%] w-[95%] px-8 mx-auto bg-slate-600 py-10 rounded-lg">
       <form>
-        <div className="flex gap-x-4 justify-center">
-          <div className="mb-4 w-1/2">
+      <div className='mb-2 md:mb-2 text-center'>
+        <h1 className='text-3xl text-white font-bold'>Register</h1>
+      </div>
+        <div className="flex sm:flex-row flex-col gap-x-4 justify-center">
+          <div className="mb-4 sm:w-1/2">
           <label className="text-white space-y-4 font-mabry">
          Name
             <span className="text-red-500 m-2 font-mabry">*</span>
@@ -172,28 +196,30 @@ const Signup = ({passdata}) => {
               id="name"
               className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
               placeholder="John Doe"
+              required
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="mb-4 w-1/2">
+          <div className="mb-4 sm:w-1/2">
           <label className="text-white space-y-4 font-mabry">
           Phone
             <span className="text-red-500 m-2 font-mabry">*</span>
           </label>
             <input
-              type="text"
-              id="phone"
-              className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
-              placeholder="1234567890"
+             type="tel"
+             id="phone"
+             className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
+             placeholder="Phone number (123-456-7890)"
+             required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
         </div>
 
-        <div className="flex gap-x-4 justify-center">
-          <div className="mb-4 w-1/2">
+        <div className="flex  sm:flex-row flex-col gap-x-4 justify-center">
+          <div className="mb-4 sm:w-1/2">
           <label className="text-white space-y-4 font-mabry">
           Email
             <span className="text-red-500 m-2 font-mabry">*</span>
@@ -203,20 +229,18 @@ const Signup = ({passdata}) => {
               id="email"
               className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
               placeholder="john.doe@example.com"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-4 w-1/2">
+          <div className="mb-4 sm:w-1/2">
           <label className="text-white space-y-4 font-mabry">
           Password
             <span className="text-red-500 m-2 font-mabry">*</span>
           </label>
             <input
-              type="password"
-              id="password"
-              className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
-              placeholder="********"
+             type="password" id="password"  className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg" required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -227,7 +251,7 @@ const Signup = ({passdata}) => {
         <label className="text-white space-y-4 font-mabry">
 Gender            <span className="text-red-500 m-2 font-mabry">*</span>
           </label>
-          <div className="flex gap-x-6">
+          <div className="flex  sm:flex-row flex-col gap-x-6">
             <div>
               <input
                 type="radio"
@@ -273,7 +297,7 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
           How did you hear about this?
             <span className="text-red-500 m-2 font-mabry">*</span>
           </label>
-          <div className="flex gap-x-4 ">
+          <div className="flex  sm:flex-row flex-col gap-x-4 ">
             <div>
               <input
                 type="checkbox"
@@ -325,8 +349,8 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
           </div>
         </div>
 
-        <div className="mb-4 flex gap-x-4 justify-center">
-        <div className="w-1/2">
+        <div className="mb-4 sm:flex-row flex-col flex gap-x-4 justify-center">
+        <div className="sm:w-1/2">
           <label className="text-white space-y-4 font-mabry">
             State
             <span className="text-red-500 m-2 font-mabry">*</span>
@@ -356,7 +380,7 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
           </div>
         </div>
 
-        <div className="w-1/2 font-mabry">
+        <div className="sm:w-1/2 font-mabry">
           <label className="text-white space-y-4 font-mabry">
             Cities
             <span className="text-red-500 m-2 font-mabry">*</span>
@@ -391,6 +415,9 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
            Register
           </button>
         </div>
+      {submit?(  <div className="text-center">
+          <h5 className="text-red-400 font-mabry font-semibold">{errorM}</h5>
+        </div>):null}
         <div className="text-center">
           <h4 className="text-white font-mabry font-semibold">Alerady an account? <Link to="/login" className="text-blue-500">Log-In</Link></h4>
         </div>

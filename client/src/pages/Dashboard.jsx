@@ -130,20 +130,39 @@ const Dashboard = ({logedin,logoutHandler}) => {
         }
       };
 
+      const [change,setChange]=useState(false)
+      const sortFilter=(e)=>{
+        dataList.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+        
+          if (e==="acc"?nameA > nameB:nameA<nameB) {
+            return -1; 
+          } else if (e==="acc"?nameA < nameB:nameA>nameB) {
+            return 1;
+          } else {
+            return 0; 
+          }
+          
+        });
+        setChange(!change)
+      }
+
   return (
     <div className="">
       <Navbar logoutHandler={logoutHandler}/>
-      <div className="flex justify-between px-[15%] mt-10 gap-x-10">
-        <div className="w-[75%]">
-          <NavbarFilter fetchData={fetchData} searchhandler={searchhandler}/>
+      <div className="flex md:flex-row gap-y-16 flex-col justify-between px-[15%] mt-10 gap-x-10 pb-10">
+        <div className="md:w-[75%] md:order-1 order-2">
+          <NavbarFilter sortFilter={sortFilter} searchhandler={searchhandler}/>
           <UserList
             dataList={dataList}
             editHandler={editHandler}
             deleteUser={deleteUser}
             val={val}
+            change={change}
           />
         </div>
-        <div className="w-[25%]">
+        <div className="md:w-[25%] md:order-2">
           <button
             type="submit"
             className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 

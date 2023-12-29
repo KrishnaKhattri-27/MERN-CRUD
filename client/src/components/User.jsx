@@ -19,9 +19,15 @@ const User = ({ item, editHandler, deleteUser, val,dataList }) => {
 
   return (
     <div className={`${display}`}>
-      <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900">
+      <div className="block p-6 bg-gray-800 rounded-lg ">
+        <h5 className="text-lg font-semibold tracking-tight text-white">
           {item.name}
+        </h5>
+        <h5 className="text-xs font-normal tracking-tight text-white">
+          {item.email}
+        </h5>
+        <h5 className="mb-2 text-xs font-normal tracking-tight text-white">
+          {item.phone}
         </h5>
         <div className="flex gap-x-4">
           <button
