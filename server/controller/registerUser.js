@@ -9,13 +9,13 @@ const createToken=(id)=>{
 
 const registerUser=async(req,res)=>{
         const userData=req.body
-        console.log("data fetched",userData);
+        // console.log("data fetched",userData);
         try {
             const response=await user.signup(userData)
             const token=createToken(response._id)
             res.status(200).json({
                     success:true,
-                    data:token,
+                    data:{token:token,name:response.name},
                     message:"entry created successfuly" 
             })    
 

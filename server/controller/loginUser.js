@@ -15,7 +15,7 @@ const loginUser=async(req,res)=>{
         const token=createToken(response._id)
         res.status(200).json({
                 success:true,
-                data:token,
+                data:{token:token,name:response.name},
                 message:"entry created successfuly" 
         })    
     } catch (error) {

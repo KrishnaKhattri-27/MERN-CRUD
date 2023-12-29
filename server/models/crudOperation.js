@@ -18,7 +18,12 @@ const crudSchema=mongoose.Schema(
             type:Date,
             required:true,
             default:Date.now()
+        },
+        ID:{
+            type:String,
+            required:true,
         }
+        
     }
 )
 

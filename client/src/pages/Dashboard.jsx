@@ -4,20 +4,15 @@ import AddUser from "../components/AddUser";
 import User from "../components/User";
 import NavbarFilter from "../components/NavbarFilter";
 import UserList from "../components/UserList";
-import {useNavigate} from  "react-router-dom"
 
 const Dashboard = ({logedin,logoutHandler}) => {
-  const navigate=useNavigate()
-  // if(!logedin)
-  // navigate("/register");
-
+  const [token,setToken]=useState("")
   const [dataList, setDataList] = useState();
   const [status, setStatus] = useState(false);
   const [op, setOp] = useState(false);
   const [ID, setID] = useState("");
   const [newuser, setNewuser] = useState({ name: "", email: "", phone: "" });
   const [addUpdate, setAddUpdate] = useState("");
-
   const addUserHandler = (event) => {
     event.preventDefault();
     setNewuser({
@@ -37,6 +32,7 @@ const Dashboard = ({logedin,logoutHandler}) => {
       body: JSON.stringify(newuser),
       headers: {
         "Content-Type": "application/json",
+          "Authorization":"Bearer "+token
       },
     });
     const json = await response.json();
@@ -44,7 +40,8 @@ const Dashboard = ({logedin,logoutHandler}) => {
       setNewuser({ name: "", email: "", phone: "" });
       fetchData();
     } else {
-      console.log(json.error);
+      // console.log(json);
+      return
     }
   };
 
@@ -54,27 +51,28 @@ const Dashboard = ({logedin,logoutHandler}) => {
       body: JSON.stringify(newuser),
       headers: {
         "Content-Type": "application/json",
+          "Authorization":`Bearer ${token}`
       },
     });
     const json = await response.json();
     if (response) {
       fetchData();
-      console.log(json.data);
     } else {
       return;
     }
   };
 
-  const fetchData = async (e) => {
-    const response = await fetch("/user/getUser");
+  const fetchData = async () => {
+    const response = await fetch("/user/getUser",{
+      headers:{
+        "Authorization":"Bearer "+token
+      }
+    });
     const json = await response.json();
-    if (response) {
-      console.log(json.data);
-      // json.data.forEach(e=>{
-      //   e.name=e.name.toLowerCase().replace(/(?:^|\s)\S/g, char => char.toUpperCase());
-      // })
+    if (response) {    
       setDataList(json.data);
     } else {
+      console.log("error in fetching");
       return;
     }
   };
@@ -91,27 +89,31 @@ const Dashboard = ({logedin,logoutHandler}) => {
   };
 
   const deleteUser = async (id) => {
-    console.log(id);
     const response = await fetch("/user/delete/" + id, {
       method: "DELETE",
       //   body: JSON.stringify(newuser),
       headers: {
         "Content-Type": "application/json",
+          'Authorization':`Bearer ${token}`
       },
     });
     const json = await response.json();
     if (response) {
       fetchData();
-      console.log(json.data);
     } else {
       return;
     }
   };
-
-
-  useEffect(() => {
+  useEffect(()=>{
+    const user=JSON.parse(localStorage.getItem("user"))
+    if(user){
+      setToken(user.token)
+  }
+  },[])
+  useEffect(()=>{
     fetchData();
-  }, []);
+  },[token])
+
 
   useEffect(() => {
     if (addUpdate === "Update") updateData();

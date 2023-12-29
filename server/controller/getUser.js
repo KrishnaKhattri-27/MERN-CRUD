@@ -2,7 +2,8 @@ const crud=require('../models/crudOperation')
 
 const getUser=async(req,res)=>{
     try{
-     const response=await crud.find()
+        const user_id=req.userID;
+     const response=await crud.find({ID:user_id})
      res.status(200).json(
         {
             success:true,

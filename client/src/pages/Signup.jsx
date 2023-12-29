@@ -83,7 +83,7 @@ const Signup = ({passdata}) => {
  
 
 
-  async function getCitiesInState(country, state) {
+ const getCitiesInState= async function (country, state) {
     const url = "https://countriesnow.space/api/v0.1/countries/state/cities";
     const data = {
       country,
