@@ -43,7 +43,7 @@ function App() {
     const pass = async () => {
       let response;
       if (status) {
-        response = await fetch("/user/register", {
+        response = await fetch("https://mern-crud-delta.vercel.app/user/register", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
@@ -51,7 +51,7 @@ function App() {
           },
         });
       } else {
-        response = await fetch("/user/login", {
+        response = await fetch("https://mern-crud-delta.vercel.app/user/login", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {

@@ -27,7 +27,7 @@ const Dashboard = ({logedin,logoutHandler}) => {
   };
 
   const passData = async () => {
-    const response = await fetch("/user/addUser", {
+    const response = await fetch("https://mern-crud-delta.vercel.app/user/addUser", {
       method: "POST",
       body: JSON.stringify(newuser),
       headers: {
@@ -46,7 +46,7 @@ const Dashboard = ({logedin,logoutHandler}) => {
   };
 
   const updateData = async () => {
-    const response = await fetch("/user/update/" + ID, {
+    const response = await fetch("https://mern-crud-delta.vercel.app/user/update/" + ID, {
       method: "POST",
       body: JSON.stringify(newuser),
       headers: {
@@ -63,7 +63,7 @@ const Dashboard = ({logedin,logoutHandler}) => {
   };
 
   const fetchData = async () => {
-    const response = await fetch("/user/getUser",{
+    const response = await fetch("https://mern-crud-delta.vercel.app/user/getUser",{
       headers:{
         "Authorization":"Bearer "+token
       }
@@ -89,7 +89,7 @@ const Dashboard = ({logedin,logoutHandler}) => {
   };
 
   const deleteUser = async (id) => {
-    const response = await fetch("/user/delete/" + id, {
+    const response = await fetch("https://mern-crud-delta.vercel.app/user/delete/" + id, {
       method: "DELETE",
       //   body: JSON.stringify(newuser),
       headers: {
