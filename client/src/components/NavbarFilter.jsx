@@ -1,6 +1,8 @@
 import React from 'react'
+import { FaArrowUp,FaArrowDown } from "react-icons/fa";
 
-const NavbarFilter = () => {
+
+const NavbarFilter = ({fetchData}) => {
   return (
     <div className="bg-white rounded-lg">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -32,6 +34,16 @@ const NavbarFilter = () => {
           />
         </div>
       </div>
+     <div className='flex gap-x-4'>
+     <div className='flex items-center cursor-pointer' onClick={()=>fetchData("decending")}>
+        <span className='font-bold'>A</span>
+        <FaArrowUp />
+      </div>
+      <div className='flex items-center cursor-pointer' onClick={()=>fetchData("accending")}>
+        <span className='font-bold'>A</span>
+        <FaArrowDown />
+      </div>
+     </div>
     </div>
   </div>
   )

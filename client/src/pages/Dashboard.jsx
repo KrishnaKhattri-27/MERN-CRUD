@@ -15,7 +15,6 @@ const Dashboard = () => {
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    // setparameters(event);
     setNewuser({
       name: event.target.name.value,
       email: event.target.email.value,
@@ -62,10 +61,14 @@ const Dashboard = () => {
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = async (e) => {
     const response = await fetch("/user/getUser");
     const json = await response.json();
     if (response) {
+      console.log(json.data);
+      // json.data.forEach(e=>{
+      //   e.name=e.name.toLowerCase().replace(/(?:^|\s)\S/g, char => char.toUpperCase());
+      // })
       setDataList(json.data);
     } else {
       return;
@@ -101,6 +104,7 @@ const Dashboard = () => {
     }
   };
 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -115,7 +119,7 @@ const Dashboard = () => {
       <Navbar />
       <div className="flex justify-between px-[15%] mt-10 gap-x-10">
         <div className="w-[75%]">
-          <NavbarFilter />
+          <NavbarFilter fetchData={fetchData}/>
           <UserList
             dataList={dataList}
             editHandler={editHandler}
