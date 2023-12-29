@@ -40,7 +40,7 @@ const registerUser=mongoose.Schema(
     }
 );
 
-
+//stastic signup method
 registerUser.statics.signup = async function(userData){
     const exists=await this.findOne({email:userData.email})
     
@@ -64,6 +64,27 @@ registerUser.statics.signup = async function(userData){
 
     return response;
 
+};
+
+
+//static log-in method
+registerUser.statics.login = async function(email,password){
+    
+     
+    if(!email || !password)
+    throw Error("Email already in use")
+
+    const user=await this.findOne({email})
+
+    if(!user)
+    throw Error("Email not exists. Please register first")
+
+    const match=await bcrypt.compare(password,user.password)
+
+    if(!match)
+    throw Error("Incoreect Password")
+
+    return user
 };
 
 

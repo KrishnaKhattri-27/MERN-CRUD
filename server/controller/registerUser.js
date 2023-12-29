@@ -9,6 +9,7 @@ const createToken=(id)=>{
 
 const registerUser=async(req,res)=>{
         const userData=req.body
+        console.log("data fetched",userData);
         try {
             const response=await user.signup(userData)
             const token=createToken(response._id)

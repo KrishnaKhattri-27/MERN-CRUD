@@ -4,8 +4,13 @@ import AddUser from "../components/AddUser";
 import User from "../components/User";
 import NavbarFilter from "../components/NavbarFilter";
 import UserList from "../components/UserList";
+import {useNavigate} from  "react-router-dom"
 
-const Dashboard = () => {
+const Dashboard = ({logedin,logoutHandler}) => {
+  const navigate=useNavigate()
+  // if(!logedin)
+  // navigate("/register");
+
   const [dataList, setDataList] = useState();
   const [status, setStatus] = useState(false);
   const [op, setOp] = useState(false);
@@ -27,7 +32,6 @@ const Dashboard = () => {
   };
 
   const passData = async () => {
-    console.log("enetred", newuser);
     const response = await fetch("/user/addUser", {
       method: "POST",
       body: JSON.stringify(newuser),
@@ -116,7 +120,7 @@ const Dashboard = () => {
 
   return (
     <div className="">
-      <Navbar />
+      <Navbar logoutHandler={logoutHandler}/>
       <div className="flex justify-between px-[15%] mt-10 gap-x-10">
         <div className="w-[75%]">
           <NavbarFilter fetchData={fetchData}/>

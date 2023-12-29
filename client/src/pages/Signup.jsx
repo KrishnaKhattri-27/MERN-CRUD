@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({passdata}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ const Signup = () => {
   const [hearAbout, setHearAbout] = useState([]);
   // const [selectedState, setSelectedState] = useState('');
   const [states, setStates] = useState([]);
-  // const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const [cities, setCities] = useState([]);
 
   const [userData, setUserData] = useState({
@@ -73,9 +73,15 @@ const Signup = () => {
       gender: gender,
       hearAbout: hearAbout,
       state: states,
-      city: cities,
+      city: selectedCity,
     });
   };
+
+  useEffect(()=>{
+    passdata(userData,"signup");
+  },[userData])
+ 
+
 
   async function getCitiesInState(country, state) {
     const url = "https://countriesnow.space/api/v0.1/countries/state/cities";
@@ -146,6 +152,10 @@ const Signup = () => {
     setInputValue(value);
     setSuggestions([]);
   };
+
+  const handlecity=(e)=>{
+    console.log(e.target.value);
+  }
 
   return (
    <div className="h-screen flex items-center">
@@ -355,15 +365,14 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
             className="w-full px-4 py-2 my-2 font-mabry bg-gray-800 text-gray-100 border border-black rounded-lg"
             id="country-district"
             name="district"
-            // onChange={
-            //     collegeDetailsChangeHandler
-            // }
+            onChange={(e)=>setSelectedCity(e.target.value) }
           >
             <option value="" className="w-1/2" disabled selected>
               Select district
             </option>
             {cities.map((name, index) => (
-              <option className="w-1/2" key={index} value={name}>
+              <option className="w-1/2" key={index} value={name} 
+              >
                 {name}
               </option>
             ))}
@@ -383,7 +392,7 @@ Gender            <span className="text-red-500 m-2 font-mabry">*</span>
           </button>
         </div>
         <div className="text-center">
-          <h4 className="text-white font-mabry font-semibold">Alerady an account? <Link to="/" className="text-blue-500">Log-In</Link></h4>
+          <h4 className="text-white font-mabry font-semibold">Alerady an account? <Link to="/login" className="text-blue-500">Log-In</Link></h4>
         </div>
       </form>
     </div>
