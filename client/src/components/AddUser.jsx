@@ -19,7 +19,7 @@ const AddUser = ({ addUserHandler,title }) => {
           <input
             type="text"
             id="name"
-            className=" border border-gray-300 text-gray-900 text-sm rounded-lg bg-gray-800 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className=" border border-gray-300 text-white text-sm rounded-lg bg-gray-800 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Jhon hue"
             // value={edituser.name}
             required
@@ -35,7 +35,7 @@ const AddUser = ({ addUserHandler,title }) => {
           <input
             type="email"
             id="email"
-            className="bg-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-800 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="name@flowbite.com"
             // value={edituser.email}
             required
@@ -51,7 +51,7 @@ const AddUser = ({ addUserHandler,title }) => {
           <input
             type="tel"
             id="phone"
-            className="bg-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-800 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Phone number (123-456-7890)"
             // value={edituser.phone}
             required
