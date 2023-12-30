@@ -17,6 +17,10 @@ app.listen(port,()=>{
     console.log(`server started at ${port}`);
 })
 
+app.get("/",(req,res)=>{
+res.send("<h1>krishna</h1>")
+})
+
 //connect to databse
 const dbconnect=require("./config/database")
 dbconnect();

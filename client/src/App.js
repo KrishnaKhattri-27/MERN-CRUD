@@ -4,6 +4,8 @@ import Dashboard from "./pages/Dashboard";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { useState, useEffect } from "react";
+import axios from 'axios';
+
 
 function App() {
   const [data, setData] = useState();
@@ -51,13 +53,15 @@ function App() {
           },
         });
       } else {
-        response = await fetch("https://mern-crud-delta.vercel.app/user/login", {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        response=await axios.post('https://mern-crud-delta.vercel.app/user/login',{data:data})
+        // response = await fetch("https://mern-crud-delta.vercel.app/user/login", {
+        //   method: "POST",
+        //   body: JSON.stringify(data),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+
       }
       const json = await response.json();
       if (response.ok) {
