@@ -45,7 +45,7 @@ function App() {
     const pass = async () => {
       let response;
       if (status) {
-        response = await fetch("https://mern-crud1.onrender.com/user/register", {
+        response = await fetch("https://mern-crud-server1.onrender.com/user/register", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
@@ -53,8 +53,8 @@ function App() {
           },
         });
       } else {
-        // response=await axios.post('https://mern-crud1.onrender.com/user/login',{data:data})
-        response = await fetch("https://mern-crud1.onrender.com/user/login", {
+        // response=await axios.post('https://mern-crud-server1.onrender.com/user/login',{data:data})
+        response = await fetch("https://mern-crud-server1.onrender.com/user/login", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
