@@ -53,15 +53,14 @@ function App() {
           },
         });
       } else {
-        response=await axios.post('https://mern-crud1.onrender.com/user/login',{data:data})
-        // response = await fetch("https://mern-crud1.onrender.com/user/login", {
-        //   method: "POST",
-        //   body: JSON.stringify(data),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-
+        // response=await axios.post('https://mern-crud1.onrender.com/user/login',{data:data})
+        response = await fetch("https://mern-crud1.onrender.com/user/login", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
       }
       const json = await response.json();
       if (response.ok) {
