@@ -4,7 +4,6 @@ import Dashboard from "./pages/Dashboard";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { useState, useEffect } from "react";
-import axios from 'axios';
 
 
 function App() {
@@ -53,7 +52,6 @@ function App() {
           },
         });
       } else {
-        // response=await axios.post('https://mern-crud-server1.onrender.com/user/login',{data:data})
         response = await fetch("https://mern-crud-server1.onrender.com/user/login", {
           method: "POST",
           body: JSON.stringify(data),
